@@ -43,10 +43,10 @@ footer { max-width: 1200px; margin: 0 auto; padding: 40px max(16px, 4vw) 48px; c
 .blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
 .blobs i { position: absolute; width: 46vmax; height: 46vmax; opacity: .22; filter: blur(70px);
   border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: morph 22s ease-in-out infinite alternate, drift 34s ease-in-out infinite alternate; }
-.blobs i:nth-child(1) { background: #1fd17a; top: -18vmax; left: -12vmax; }
-.blobs i:nth-child(2) { background: #ff5a36; top: 10vmax; right: -20vmax; animation-delay: -6s, -12s; }
+.blobs i:nth-child(1) { background: #2fd7c7; top: -18vmax; left: -12vmax; }
+.blobs i:nth-child(2) { background: #2cbe82; top: 10vmax; right: -20vmax; animation-delay: -6s, -12s; }
 .blobs i:nth-child(3) { background: #5b7cff; bottom: -22vmax; left: 8vmax; animation-delay: -11s, -4s; }
-.blobs i:nth-child(4) { background: #ffc933; bottom: -10vmax; right: 6vmax; width: 34vmax; height: 34vmax; animation-delay: -15s, -20s; }
+.blobs i:nth-child(4) { background: #1352de; bottom: -10vmax; right: 6vmax; width: 34vmax; height: 34vmax; animation-delay: -15s, -20s; }
 @keyframes morph {
   0%   { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
   50%  { border-radius: 63% 37% 38% 62% / 58% 63% 37% 42%; }

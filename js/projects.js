@@ -4,8 +4,8 @@ window.PROJECTS = [
     icon: "assets/apps/skippify.png",
     name: "Skippify",
     description: "Tu escucha en Spotify, medida y bajo control: registra qué escuchas y qué saltas, y compite con tus amigos.",
-    accent: "#1fd17a",
-    ink: "#06210f",
+    accent: "#2fd7c7",
+    ink: "#03201d",
     features: [
       { icon: "skip", title: "Salto de duplicadas" },
       { icon: "mute", title: "Silencia anuncios" },
@@ -21,8 +21,8 @@ window.PROJECTS = [
     icon: "assets/apps/gymbros.png",
     name: "GymBros",
     description: "El gimnasio con tu grupo de amigos: rutinas, rachas de asistencia, récords y un ranking por puntos.",
-    accent: "#ff5a36",
-    ink: "#2a0c04",
+    accent: "#2cbe82",
+    ink: "#04261a",
     features: [
       { icon: "dumbbell", title: "Rutinas y entrenamientos" },
       { icon: "flame", title: "Rachas de asistencia" },
@@ -55,8 +55,8 @@ window.PROJECTS = [
     icon: "assets/apps/salbus.png",
     name: "SALBUS",
     description: "Los autobuses urbanos de Salamanca en tiempo real: cuándo llega el próximo, por dónde va y si es puntual.",
-    accent: "#ffc933",
-    ink: "#2b2000",
+    accent: "#1352de",
+    ink: "#ffffff",
     features: [
       { icon: "clock", title: "Llegadas en vivo" },
       { icon: "route", title: "Sigue tu autobús" },
