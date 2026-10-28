@@ -1,0 +1,157 @@
+/*
+ * Catálogo de proyectos. Para añadir uno nuevo, copia un bloque y rellénalo:
+ * la página y su infografía se generan solas a partir de estos datos.
+ *
+ * status: "activo" | "desarrollo" | "privado"
+ * links:  { primary: {label, url}, secondary: {label, url} }  (primary = descarga/acceso)
+ * flow:   pasos de la infografía de arquitectura (de izquierda a derecha)
+ * icon:   nombre de un icono de ICONS en main.js
+ */
+window.PROJECTS = [
+  {
+    id: "skippify",
+    name: "Skippify",
+    tagline: "Tu escucha en Spotify, medida y bajo control.",
+    summary:
+      "Registra qué escuchas y qué saltas, silencia anuncios en cuentas gratuitas, para la música con un temporizador y te mete en una liga semanal con tus amigos.",
+    platform: "Android",
+    status: "activo",
+    version: "4.4.9",
+    accent: "#1fd17a",
+    ink: "#06210f",
+    stats: [
+      { value: "3", label: "modos para el salto de duplicadas" },
+      { value: "6", label: "periodos de estadísticas, de 1 semana a 6 meses" },
+      { value: "Semanal", label: "liga con tus amigos" },
+    ],
+    features: [
+      { icon: "skip", title: "Salto de duplicadas", text: "Evita oír la misma canción antes de tiempo." },
+      { icon: "mute", title: "Silencia anuncios", text: "En cuentas gratuitas de Spotify." },
+      { icon: "timer", title: "Temporizador", text: "Pausa al acabar la canción en curso." },
+      { icon: "chart", title: "Estadísticas", text: "Escuchas, saltos y rachas por periodo." },
+      { icon: "trophy", title: "Liga semanal", text: "Clasificación con tu grupo de amigos." },
+      { icon: "refresh", title: "Se actualiza sola", text: "Detecta la última versión y la instala." },
+    ],
+    flow: [
+      { icon: "music", title: "Spotify", text: "Canción en curso" },
+      { icon: "phone", title: "App Android", text: "Vue + Capacitor" },
+      { icon: "cloud", title: "Firebase", text: "Sincronización" },
+      { icon: "trophy", title: "Liga", text: "Clasificación semanal" },
+    ],
+    stack: ["Vue 3", "Vite", "Capacitor", "Firebase", "Chart.js", "Nostr"],
+    links: {
+      primary: { label: "Descargar APK", url: "https://github.com/icsdesigns/SKIPPIFY/releases/latest" },
+      secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/SKIPPIFY" },
+    },
+  },
+  {
+    id: "gymbros",
+    name: "GymBros",
+    tagline: "El gimnasio, con tu grupo de amigos.",
+    summary:
+      "Rutinas, entrenamientos, rachas de asistencia y un ranking por puntos. Detecta tus récords solo y mantiene tus medidas en privado.",
+    platform: "Web (PWA)",
+    status: "privado",
+    version: null,
+    accent: "#ff5a36",
+    ink: "#2a0c04",
+    stats: [
+      { value: "~65", label: "ejercicios en el catálogo" },
+      { value: "14", label: "módulos de API" },
+      { value: "+30", label: "puntos por cada récord nuevo" },
+    ],
+    features: [
+      { icon: "dumbbell", title: "Entrenamientos", text: "Rutinas y series registradas al momento." },
+      { icon: "flame", title: "Rachas", text: "Días seguidos y bonus cada 7." },
+      { icon: "trophy", title: "Ranking", text: "Semanal, mensual y anual, con podio." },
+      { icon: "bolt", title: "Récords automáticos", text: "Los detecta al terminar de entrenar." },
+      { icon: "lock", title: "Medidas privadas", text: "Nadie más puede consultarlas." },
+      { icon: "users", title: "Panel de admin", text: "Usuarios, puntuaciones y avisos." },
+    ],
+    flow: [
+      { icon: "phone", title: "PWA", text: "Next.js 14" },
+      { icon: "bolt", title: "tRPC", text: "API tipada" },
+      { icon: "db", title: "PostgreSQL", text: "Prisma + Supabase" },
+      { icon: "trophy", title: "Puntos", text: "Ranking y logros" },
+    ],
+    stack: ["Next.js 14", "TypeScript", "Tailwind", "tRPC", "Prisma", "Supabase", "NextAuth", "Recharts"],
+    links: {
+      // Sin URL: la app es privada y se entra con código de invitación.
+      primary: { label: "Acceso por invitación", url: null },
+      secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/GYMBROS" },
+    },
+  },
+  {
+    id: "smartcount",
+    name: "SmartCount",
+    tagline: "Tricount sin abrir Tricount.",
+    summary:
+      "Crea y edita gastos, lee grupos de ahorro y convierte tus notificaciones de Bizum en movimientos, siempre con tu confirmación.",
+    platform: "Android",
+    status: "activo",
+    version: null,
+    accent: "#5b7cff",
+    ink: "#0a1233",
+    stats: [
+      { value: "3", label: "tipos de movimiento: gasto, ingreso y reembolso" },
+      { value: "0", label: "movimientos enviados sin tu confirmación" },
+      { value: "2", label: "vistas de grupo: gastos y ahorro" },
+    ],
+    features: [
+      { icon: "users", title: "Tus grupos", text: "Rejilla con balance de cada miembro." },
+      { icon: "plus", title: "Gastos sin salir", text: "Crear, editar y borrar movimientos." },
+      { icon: "bell", title: "Detecta Bizum", text: "Lee la notificación y propone el gasto." },
+      { icon: "inbox", title: "Bandeja", text: "Revisas y envías a uno o varios grupos." },
+      { icon: "piggy", title: "Grupos de ahorro", text: "Ingresos, gastos y lo que queda." },
+      { icon: "widget", title: "Widgets", text: "Tu balance en la pantalla de inicio." },
+    ],
+    flow: [
+      { icon: "bell", title: "Notificación", text: "Bizum o transferencia" },
+      { icon: "inbox", title: "Bandeja", text: "Room en el dispositivo" },
+      { icon: "check", title: "Confirmas", text: "Tú decides el grupo" },
+      { icon: "cloud", title: "Tricount", text: "Movimiento creado" },
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Room", "ViewModel + StateFlow", "Gradle"],
+    note: "Uso personal: la app usa la API interna de Tricount, que no es pública.",
+    links: {
+      primary: { label: "Descargar APK", url: "https://github.com/icsdesigns/SMARTCOUNT/releases/latest" },
+      secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/SMARTCOUNT" },
+    },
+  },
+  {
+    id: "salbus",
+    name: "SALBUS",
+    tagline: "Los autobuses de Salamanca, a tiempo real.",
+    summary:
+      "Consulta cuándo llega el próximo autobús, síguelo por su recorrido y mide la puntualidad real de cada línea frente al horario.",
+    platform: "Android",
+    status: "activo",
+    version: null,
+    accent: "#ffc933",
+    ink: "#2b2000",
+    stats: [
+      { value: "27", label: "líneas urbanas" },
+      { value: "80", label: "sentidos de recorrido" },
+      { value: "349", label: "paradas en la red" },
+    ],
+    features: [
+      { icon: "clock", title: "Llegadas en vivo", text: "Tiempos oficiales por parada." },
+      { icon: "route", title: "Seguimiento", text: "Sigue un autobús por su recorrido." },
+      { icon: "chart", title: "Puntualidad", text: "Desvío real frente al horario." },
+      { icon: "bell", title: "Avisos", text: "Notificaciones locales de llegada." },
+      { icon: "map", title: "Rutas a pie", text: "Paradas cercanas por calles peatonales." },
+      { icon: "widget", title: "Widget", text: "Tus paradas en la pantalla de inicio." },
+    ],
+    flow: [
+      { icon: "cloud", title: "Salamanca de Transportes", text: "Llegadas y red de líneas" },
+      { icon: "phone", title: "SALBUS", text: "Capacitor + TypeScript" },
+      { icon: "clock", title: "Horario GTFS", text: "Comparación teórica" },
+      { icon: "chart", title: "Puntualidad", text: "Medida por línea" },
+    ],
+    stack: ["Capacitor", "Vite", "TypeScript", "Android nativo", "GTFS", "OpenStreetMap"],
+    links: {
+      primary: { label: "Descargar APK", url: "https://github.com/icsdesigns/BUS-SALAMANCA/releases/latest" },
+      secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/BUS-SALAMANCA" },
+    },
+  },
+];
