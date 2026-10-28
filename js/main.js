@@ -39,6 +39,7 @@
     return '' +
       '<article class="card" id="' + esc(p.id) + '" style="--accent:' + p.accent + ';--on-accent:' + p.ink + ';--i:' + i + '">' +
         '<div class="face">' +
+          '<img class="app-icon" src="' + esc(p.icon) + '" alt="" width="72" height="72" loading="lazy">' +
           '<h2>' + esc(p.name) + '</h2>' +
           '<p>' + esc(p.description) + '</p>' +
         '</div>' +

@@ -1,6 +1,7 @@
 window.PROJECTS = [
   {
     id: "skippify",
+    icon: "assets/apps/skippify.png",
     name: "Skippify",
     description: "Tu escucha en Spotify, medida y bajo control: registra qué escuchas y qué saltas, y compite con tus amigos.",
     accent: "#1fd17a",
@@ -17,6 +18,7 @@ window.PROJECTS = [
   },
   {
     id: "gymbros",
+    icon: "assets/apps/gymbros.png",
     name: "GymBros",
     description: "El gimnasio con tu grupo de amigos: rutinas, rachas de asistencia, récords y un ranking por puntos.",
     accent: "#ff5a36",
@@ -33,6 +35,7 @@ window.PROJECTS = [
   },
   {
     id: "smartcount",
+    icon: "assets/apps/smartcount.svg",
     name: "SmartCount",
     description: "Tricount sin abrir Tricount: gestiona tus gastos compartidos y convierte tus Bizum en movimientos con un toque.",
     accent: "#5b7cff",
@@ -49,6 +52,7 @@ window.PROJECTS = [
   },
   {
     id: "salbus",
+    icon: "assets/apps/salbus.png",
     name: "SALBUS",
     description: "Los autobuses urbanos de Salamanca en tiempo real: cuándo llega el próximo, por dónde va y si es puntual.",
     accent: "#ffc933",
