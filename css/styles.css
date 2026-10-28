@@ -37,3 +37,44 @@ h1 { margin: 0; font: 800 clamp(2.6rem, 8vw, 6rem)/.95 var(--font-d); letter-spa
 
 footer { max-width: 1200px; margin: 0 auto; padding: 40px max(16px, 4vw) 48px; color: var(--mute); font-size: .9rem; }
 @media (max-width: 380px) { .feats { grid-template-columns: 1fr; } }
+
+/* Fondo orgánico: manchas de color que cambian de forma lentamente */
+.blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.blobs i { position: absolute; width: 46vmax; height: 46vmax; opacity: .22; filter: blur(70px);
+  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: morph 22s ease-in-out infinite alternate, drift 34s ease-in-out infinite alternate; }
+.blobs i:nth-child(1) { background: #1fd17a; top: -18vmax; left: -12vmax; }
+.blobs i:nth-child(2) { background: #ff5a36; top: 10vmax; right: -20vmax; animation-delay: -6s, -12s; }
+.blobs i:nth-child(3) { background: #5b7cff; bottom: -22vmax; left: 8vmax; animation-delay: -11s, -4s; }
+.blobs i:nth-child(4) { background: #ffc933; bottom: -10vmax; right: 6vmax; width: 34vmax; height: 34vmax; animation-delay: -15s, -20s; }
+@keyframes morph {
+  0%   { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
+  50%  { border-radius: 63% 37% 38% 62% / 58% 63% 37% 42%; }
+  100% { border-radius: 36% 64% 52% 48% / 37% 52% 48% 63%; }
+}
+@keyframes drift {
+  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate(6vmax, 4vmax) rotate(40deg) scale(1.08); }
+  100% { transform: translate(-4vmax, 7vmax) rotate(-25deg) scale(.95); }
+}
+
+/* Entrada escalonada de las tarjetas */
+.card { animation: rise .9s cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(.12s * var(--i) + .15s); }
+.hero h1, .hero .brand { animation: rise .9s cubic-bezier(.2, .8, .2, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px) scale(.98); } to { opacity: 1; transform: none; } }
+
+/* Mancha viva dentro de cada cabecera de color */
+.face { position: relative; isolation: isolate; }
+.face::before { content: ""; position: absolute; z-index: -1; width: 260px; height: 260px; top: -90px; right: -70px;
+  background: rgba(255, 255, 255, .22); border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+  animation: morph 12s ease-in-out infinite alternate, spin 40s linear infinite; transition: transform .6s; }
+.card:nth-child(even) .face::before { animation-direction: alternate-reverse, reverse; }
+@keyframes spin { to { rotate: 360deg; } }
+.card { transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s; }
+.card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
+.card:hover .face::before { scale: 1.25; }
+.feats li .ico { transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
+.feats li:hover .ico { transform: rotate(-8deg) scale(1.08); }
+
+@media (prefers-reduced-motion: reduce) {
+  .blobs i, .face::before, .card, .hero h1, .hero .brand { animation: none !important; }
+}

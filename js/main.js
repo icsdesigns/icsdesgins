@@ -31,13 +31,13 @@
   function esc(t) {
     return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
   }
-  function card(p) {
+  function card(p, i) {
     var feats = p.features.map(function (f) {
       return '<li>' + icon(f.icon, 20) + '<span>' + esc(f.title) + '</span></li>';
     }).join('');
     var ico = p.link.kind === 'download' ? 'download' : 'arrow';
     return '' +
-      '<article class="card" id="' + esc(p.id) + '" style="--accent:' + p.accent + ';--on-accent:' + p.ink + '">' +
+      '<article class="card" id="' + esc(p.id) + '" style="--accent:' + p.accent + ';--on-accent:' + p.ink + ';--i:' + i + '">' +
         '<div class="face">' +
           '<h2>' + esc(p.name) + '</h2>' +
           '<p>' + esc(p.description) + '</p>' +
