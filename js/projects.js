@@ -1,12 +1,3 @@
-/*
- * Catálogo de proyectos. Para añadir uno nuevo, copia un bloque y rellénalo:
- * la página y su infografía se generan solas a partir de estos datos.
- *
- * status: "activo" | "desarrollo" | "privado"
- * links:  { primary: {label, url}, secondary: {label, url} }  (primary = descarga/acceso)
- * flow:   pasos de la infografía de arquitectura (de izquierda a derecha)
- * icon:   nombre de un icono de ICONS en main.js
- */
 window.PROJECTS = [
   {
     id: "skippify",
@@ -76,7 +67,6 @@ window.PROJECTS = [
     ],
     stack: ["Next.js 14", "TypeScript", "Tailwind", "tRPC", "Prisma", "Supabase", "NextAuth", "Recharts"],
     links: {
-      // Sin URL: la app es privada y se entra con código de invitación.
       primary: { label: "Acceso por invitación", url: null },
       secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/GYMBROS" },
     },
