@@ -42,7 +42,7 @@ window.PROJECTS = [
     summary:
       "Rutinas, entrenamientos, rachas de asistencia y un ranking por puntos. Detecta tus récords solo y mantiene tus medidas en privado.",
     platform: "Web (PWA)",
-    status: "privado",
+    status: "activo",
     version: null,
     accent: "#ff5a36",
     ink: "#2a0c04",
@@ -66,9 +66,9 @@ window.PROJECTS = [
       { icon: "trophy", title: "Puntos", text: "Ranking y logros" },
     ],
     stack: ["Next.js 14", "TypeScript", "Tailwind", "tRPC", "Prisma", "Supabase", "NextAuth", "Recharts"],
+    note: "El registro es con código de invitación.",
     links: {
-      primary: { label: "Acceso por invitación", url: null },
-      secondary: { label: "Código en GitHub", url: "https://github.com/icsdesigns/GYMBROS" },
+      primary: { label: "Abrir la app", url: "https://gymbros-three.vercel.app/" },
     },
   },
   {
