@@ -51,14 +51,17 @@
     }).join('');
     var dev = p.estado === 'desarrollo';
     var ico = /apk|descarg/i.test(p.textoBoton || '') ? 'download' : 'arrow';
-    var btn = p.enlace
-      ? '<a class="btn" href="' + esc(p.enlace) + '" rel="noopener">' + icon(ico, 20) + esc(p.textoBoton || 'Abrir') + '</a>'
-      : '';
+    var label = esc(p.textoBoton || 'Abrir');
+    var btn = !p.enlace ? ''
+      : p.bloqueado
+        ? '<span class="btn is-locked" role="link" aria-disabled="true">' + icon('lock', 20) + label + '</span>'
+        : '<a class="btn" href="' + esc(p.enlace) + '" rel="noopener">' + icon(ico, 20) + label + '</a>';
+    var status = dev ? 'En desarrollo' : 'Publicada';
     return '' +
       '<article class="card" id="' + esc(p.id) + '" style="--accent:' + (p.color || colors[0]) + ';--on-accent:' + (p.colorTexto || colors[1]) + ';--i:' + i + '">' +
         '<div class="face">' +
           '<img class="app-icon" src="' + esc(p.icono || 'assets/logo.png') + '" alt="" width="72" height="72" decoding="async"' + (i > 1 ? ' loading="lazy"' : '') + '>' +
-          (dev ? '<span class="tag">En desarrollo</span>' : '') +
+          '<span class="tag' + (dev ? ' is-dev' : '') + '">' + status + '</span>' +
           '<h2>' + esc(p.titulo) + '</h2>' +
           '<p>' + esc(p.descripcion) + '</p>' +
         '</div>' +
