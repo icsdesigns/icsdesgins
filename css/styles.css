@@ -13,7 +13,7 @@
   }
 }
 * { box-sizing: border-box; }
-@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+html { background: var(--bg); }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.55 var(--font-b); -webkit-font-smoothing: antialiased; }
 :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; border-radius: 8px; }
 .ico { flex: none; }
@@ -33,60 +33,58 @@ h1 { margin: 0; font: 800 clamp(2.6rem, 8vw, 6rem)/.95 var(--font-d); letter-spa
 .feats { list-style: none; margin: 0; padding: 22px clamp(20px, 3vw, 30px) 6px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px 16px; flex: 1; align-content: start; }
 .feats li { display: flex; align-items: center; gap: 10px; font-size: .92rem; font-weight: 500; line-height: 1.25; }
 .feats .ico { width: 36px; height: 36px; padding: 8px; border-radius: 11px; background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--ink); }
-.btn { margin: 18px clamp(20px, 3vw, 30px) clamp(20px, 3vw, 30px); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 1.02rem; text-decoration: none; transition: transform .15s, filter .15s; }
-.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.btn { margin: 18px clamp(20px, 3vw, 30px) clamp(20px, 3vw, 30px); display: flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 20px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-weight: 600; font-size: 1.02rem; text-decoration: none; }
 
 footer { max-width: 1200px; margin: 0 auto; padding: 40px max(16px, 4vw) 48px; color: var(--mute); font-size: .9rem; }
 @media (max-width: 380px) { .feats { grid-template-columns: 1fr; } }
 
-/* Fondo orgánico: manchas de color que cambian de forma lentamente */
-.blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.blobs i { position: absolute; width: 46vmax; height: 46vmax; opacity: .22; filter: blur(70px);
-  border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; animation: morph 22s ease-in-out infinite alternate, drift 34s ease-in-out infinite alternate; }
-.blobs i:nth-child(1) { background: #2fd7c7; top: -18vmax; left: -12vmax; }
-.blobs i:nth-child(2) { background: #2cbe82; top: 10vmax; right: -20vmax; animation-delay: -6s, -12s; }
-.blobs i:nth-child(3) { background: #5b7cff; bottom: -22vmax; left: 8vmax; animation-delay: -11s, -4s; }
-.blobs i:nth-child(4) { background: #1352de; bottom: -10vmax; right: 6vmax; width: 34vmax; height: 34vmax; animation-delay: -15s, -20s; }
-@keyframes morph {
-  0%   { border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%; }
-  50%  { border-radius: 63% 37% 38% 62% / 58% 63% 37% 42%; }
-  100% { border-radius: 36% 64% 52% 48% / 37% 52% 48% 63%; }
-}
-@keyframes drift {
-  0%   { transform: translate(0, 0) rotate(0deg) scale(1); }
-  50%  { transform: translate(6vmax, 4vmax) rotate(40deg) scale(1.08); }
-  100% { transform: translate(-4vmax, 7vmax) rotate(-25deg) scale(.95); }
-}
+/* Fondo: manchas de color ya difuminadas (degradado radial), solo se mueven con transform */
+.blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; contain: strict; }
+.blobs i { position: absolute; width: 60vmax; height: 60vmax; border-radius: 50%; opacity: .28; will-change: transform;
+  background: radial-gradient(closest-side, var(--c), transparent); }
+.blobs i:nth-child(1) { --c: #2fd7c7; top: -24vmax; left: -20vmax; }
+.blobs i:nth-child(2) { --c: #2cbe82; top: 0; right: -30vmax; }
+.blobs i:nth-child(3) { --c: #5b7cff; bottom: -30vmax; left: 0; }
+.blobs i:nth-child(4) { --c: #1352de; bottom: -20vmax; right: -10vmax; width: 44vmax; height: 44vmax; }
 
-/* Entrada escalonada de las tarjetas */
-.card { animation: rise .9s cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(.12s * var(--i) + .15s); }
-.hero h1, .hero .brand { animation: rise .9s cubic-bezier(.2, .8, .2, 1) both; }
-@keyframes rise { from { opacity: 0; transform: translateY(28px) scale(.98); } to { opacity: 1; transform: none; } }
-
-/* Mancha viva dentro de cada cabecera de color */
-.face { position: relative; isolation: isolate; }
+/* Cabecera de cada tarjeta */
+.face { position: relative; isolation: isolate; gap: 0; }
 .face::before { content: ""; position: absolute; z-index: -1; width: 260px; height: 260px; top: -90px; right: -70px;
-  background: rgba(255, 255, 255, .22); border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
-  animation: morph 12s ease-in-out infinite alternate, spin 40s linear infinite; transition: transform .6s; }
-.card:nth-child(even) .face::before { animation-direction: alternate-reverse, reverse; }
-@keyframes spin { to { rotate: 360deg; } }
-.card { transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s; }
-.card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
-.card:hover .face::before { scale: 1.25; }
-.feats li .ico { transition: transform .4s cubic-bezier(.3, 1.6, .5, 1); }
-.feats li:hover .ico { transform: rotate(-8deg) scale(1.08); }
+  background: rgba(255, 255, 255, .22); border-radius: 50%; }
+.app-icon { width: 72px; height: 72px; border-radius: 22%; margin-bottom: auto; object-fit: cover; background: rgba(0, 0, 0, .15);
+  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .25); }
+.face h2 { margin-top: 28px; }
+.tag { position: absolute; top: clamp(24px, 3vw, 34px); right: clamp(24px, 3vw, 34px); padding: 5px 12px; border-radius: 99px;
+  background: var(--on-accent); color: var(--accent); font-size: .8rem; font-weight: 600; }
+.brand img { transform: translateZ(0); }
 
-@media (prefers-reduced-motion: reduce) {
-  .blobs i, .face::before, .card, .hero h1, .hero .brand { animation: none !important; }
+/* Movimiento: solo con preferencia normal, solo transform/opacity y solo cuando la página está lista */
+@media (prefers-reduced-motion: no-preference) {
+  html:not(.ready) .hero, html:not(.ready) .card { opacity: 0; }
+  .ready .hero .brand, .ready h1 { animation: rise .8s cubic-bezier(.2, .8, .2, 1) backwards; }
+  .ready .card { animation: rise .8s cubic-bezier(.2, .8, .2, 1) backwards; animation-delay: calc(.1s * var(--i) + .1s); }
+  .blobs i { animation: drift 40s ease-in-out infinite alternate; }
+  .blobs i:nth-child(2) { animation-delay: -10s; }
+  .blobs i:nth-child(3) { animation-delay: -20s; }
+  .blobs i:nth-child(4) { animation-delay: -30s; }
+  .card { transition: transform .4s cubic-bezier(.2, .8, .2, 1), box-shadow .4s; }
+}
+@keyframes rise { from { opacity: 0; transform: translate3d(0, 24px, 0); } to { opacity: 1; transform: none; } }
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to   { transform: translate3d(6vmax, 5vmax, 0) scale(1.1); }
 }
 
-/* Icono de cada app sobre su cabecera */
-.app-icon { width: 72px; height: 72px; border-radius: 22%; margin-bottom: auto; object-fit: cover;
-  box-shadow: 0 14px 28px -14px rgba(0, 0, 0, .55), 0 0 0 1px rgba(255, 255, 255, .25);
-  transition: transform .6s cubic-bezier(.3, 1.5, .5, 1); }
-.face { gap: 0; }
-.face h2 { margin-top: 28px; }
-.card:hover .app-icon { transform: rotate(-6deg) scale(1.06); }
-.brand img { animation: float 6s ease-in-out infinite; }
-@keyframes float { 50% { transform: translateY(-4px) rotate(-3deg); } }
-@media (prefers-reduced-motion: reduce) { .brand img { animation: none; } }
+/* Interacción de ratón: no se aplica en pantallas táctiles (evita el hover pegado) */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .app-icon, .feats li .ico { transition: transform .4s cubic-bezier(.3, 1.5, .5, 1); }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 24px 50px -28px color-mix(in srgb, var(--accent) 70%, transparent); }
+  .card:hover .app-icon { transform: rotate(-6deg) scale(1.06); }
+  .feats li:hover .ico { transform: rotate(-8deg) scale(1.08); }
+  .btn:hover { transform: translateY(-2px); }
+}
+
+/* Móvil: sin animación continua de fondo */
+@media (max-width: 700px) {
+  .blobs i { animation: none; will-change: auto; }
+}

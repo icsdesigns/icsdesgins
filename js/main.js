@@ -31,24 +31,52 @@
   function esc(t) {
     return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; });
   }
+  var PALETTE = [['#2fd7c7', '#03201d'], ['#2cbe82', '#04261a'], ['#5b7cff', '#0a1233'], ['#1352de', '#ffffff'], ['#ff8a3d', '#2a1200']];
+  var KEYWORDS = [
+    [/salt|skip/i, 'skip'], [/anunci|silenc/i, 'mute'], [/temporiz|sue\u00f1o|tiempo|hora/i, 'timer'],
+    [/estad\u00edstic|punt|grafic/i, 'chart'], [/liga|ranking|r\u00e9cord|logro/i, 'trophy'], [/actualiz/i, 'refresh'],
+    [/rutina|entren/i, 'dumbbell'], [/racha/i, 'flame'], [/autom\u00e1tic|r\u00e1pid/i, 'bolt'],
+    [/privad|invitaci|seguro/i, 'lock'], [/grupo|usuario|amig|balance/i, 'users'], [/crear|a\u00f1adir|editar/i, 'plus'],
+    [/aviso|notific|detecta/i, 'bell'], [/bandeja|revisi/i, 'inbox'], [/ahorro/i, 'piggy'], [/widget/i, 'widget'],
+    [/llegada|vivo|reloj|horario/i, 'clock'], [/sigue|recorrido|ruta/i, 'route'], [/mapa|pie|parada/i, 'map']
+  ];
+  function featIcon(text) {
+    for (var i = 0; i < KEYWORDS.length; i++) if (KEYWORDS[i][0].test(text)) return KEYWORDS[i][1];
+    return 'bolt';
+  }
   function card(p, i) {
-    var feats = p.features.map(function (f) {
-      return '<li>' + icon(f.icon, 20) + '<span>' + esc(f.title) + '</span></li>';
+    var colors = PALETTE[i % PALETTE.length];
+    var feats = String(p.caracteristicas || '').split(';').map(function (t) { return t.trim(); }).filter(Boolean).map(function (t) {
+      return '<li>' + icon(featIcon(t), 20) + '<span>' + esc(t) + '</span></li>';
     }).join('');
-    var ico = p.link.kind === 'download' ? 'download' : 'arrow';
+    var dev = p.estado === 'desarrollo';
+    var ico = /apk|descarg/i.test(p.textoBoton || '') ? 'download' : 'arrow';
+    var btn = p.enlace
+      ? '<a class="btn" href="' + esc(p.enlace) + '" rel="noopener">' + icon(ico, 20) + esc(p.textoBoton || 'Abrir') + '</a>'
+      : '';
     return '' +
-      '<article class="card" id="' + esc(p.id) + '" style="--accent:' + p.accent + ';--on-accent:' + p.ink + ';--i:' + i + '">' +
+      '<article class="card" id="' + esc(p.id) + '" style="--accent:' + (p.color || colors[0]) + ';--on-accent:' + (p.colorTexto || colors[1]) + ';--i:' + i + '">' +
         '<div class="face">' +
-          '<img class="app-icon" src="' + esc(p.icon) + '" alt="" width="72" height="72" loading="lazy">' +
-          '<h2>' + esc(p.name) + '</h2>' +
-          '<p>' + esc(p.description) + '</p>' +
+          '<img class="app-icon" src="' + esc(p.icono || 'assets/logo.png') + '" alt="" width="72" height="72" decoding="async"' + (i > 1 ? ' loading="lazy"' : '') + '>' +
+          (dev ? '<span class="tag">En desarrollo</span>' : '') +
+          '<h2>' + esc(p.titulo) + '</h2>' +
+          '<p>' + esc(p.descripcion) + '</p>' +
         '</div>' +
-        '<ul class="feats" aria-label="Funciones principales">' + feats + '</ul>' +
-        '<a class="btn" href="' + esc(p.link.url) + '" rel="noopener">' + icon(ico, 20) + esc(p.link.label) + '</a>' +
+        '<ul class="feats" aria-label="Funciones principales">' + feats + '</ul>' + btn +
       '</article>';
   }
 
-  document.getElementById('proyectos').innerHTML = P.map(card).join('');
+  var visibles = P.filter(function (p) { return p.estado !== 'oculta'; });
+  document.getElementById('proyectos').innerHTML = visibles.map(card).join('');
   document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Las animaciones de entrada empiezan una sola vez, con la tipografía ya cargada.
+  var root = document.documentElement;
+  var go = function () { root.classList.add('ready'); };
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(go);
+    setTimeout(go, 1200);
+  } else {
+    go();
+  }
 })();
